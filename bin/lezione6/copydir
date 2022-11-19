@@ -1,0 +1,25 @@
+if test $# -ne 2
+then
+	echo "usage: copydir <dirpath> <dirpath>"
+	exit 1
+fi
+if ! test -d $1 -a -d $2
+then
+	echo "usage2: copydir <dirpath> <dirpath>"
+	exit 1
+fi
+
+for i in $1/*
+do
+	basefile=`basename $i` 
+	if test -d $i -a -x $1
+	then
+		mkdir -p $2/$basefile
+		copydir $i $2/$basefile
+	elif test -w $i -a -f $i
+	then
+		cat $i | sed "s/SP/SU/g" > $2/$basefile
+	fi
+done
+
+exit 0

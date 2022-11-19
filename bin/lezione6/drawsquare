@@ -1,0 +1,32 @@
+if test $# -ne 1
+then
+	echo "usage: drawsquare <natural_number>"
+	exit 1
+fi
+if test $1 -lt 1
+then
+	echo "usage: drawsquare <natural_number>"
+	exit 1
+fi
+
+for ((i = 1 ; i <= $1 ; i++))
+do
+	for ((j = 1 ; j <= $1 ; j++))
+	do
+		if test \( $i -eq 1 -o $i -eq $1 \) -a \( $j -eq 1 -o $j -eq $1 \)
+		then
+			echo -n "+"
+		elif test $i -eq 1 -o $i -eq $1
+		then
+			echo -n "-"
+		elif test $j -eq 1 -o $j -eq $1
+		then
+			echo -n "|"
+		else
+			echo -n " "
+		fi
+	done
+	echo ""
+done
+
+exit 0

@@ -1,0 +1,33 @@
+if test $# -ne 1
+then
+	echo "usage: rmcore <dirpath>"
+	exit 1
+fi
+if ! test -d $1
+then
+	echo "usage: rmcore <dirpath>"
+	exit 1
+fi
+if ! test -w $1
+then
+	echo "unwritable dircetory"
+	exit 1
+fi
+
+for i in $1/*
+do
+	basefile=`basename $i`
+	if test -d $i -a -w $1
+	then
+		rmcore $i
+	elif test -f $i
+	then
+		name=`echo $basefile | grep -o '^core'`
+		if test $name = core
+		then
+			rm $i
+		fi
+	fi
+done
+
+exit 0
