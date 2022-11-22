@@ -1,0 +1,2 @@
+ls | grep a
+ls | grep t
